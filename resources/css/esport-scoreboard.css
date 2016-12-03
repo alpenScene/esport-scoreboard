@@ -1,11 +1,11 @@
 #scoreboard {
   font-size: 12px;
   border: none; }
-  #scoreboard .essb-matchup:hover .essb-win {
+  #scoreboard .essb-match:hover .essb-win {
     transition: all 0.4s;
     background-color: #a2e0a2;
     color: white; }
-  #scoreboard .essb-matchup:hover .essb-lose {
+  #scoreboard .essb-match:hover .essb-lose {
     transition: all 0.4s;
     background-color: #f19393;
     color: white; }

@@ -3,7 +3,7 @@
 function essb_post_types() {
 
 	add_filter('piklist_post_types', 'register_essb_team');
-	add_filter('piklist_post_types', 'register_essb_matchup');
+	add_filter('piklist_post_types', 'register_essb_match');
 }
 
 function register_essb_team($post_types) {
@@ -38,11 +38,11 @@ function register_essb_team($post_types) {
 	return $post_types;
 }
 
-function register_essb_matchup($post_types) {
+function register_essb_match($post_types) {
 
-	$post_types['essb_matchup'] = array(
-		'labels' => piklist('post_type_labels', 'Matchup')
-		, 'title' => __('Matchup', 'esport_scoreboard')
+	$post_types['essb_match'] = array(
+		'labels' => piklist('post_type_labels', 'Match')
+		, 'title' => __('Match', 'esport_scoreboard')
 		, 'menu_icon' => 'dashicons-chart-line'
 		, 'page_icon' => 'dashicons-chart-line'
 		, 'supports' => array(
@@ -50,11 +50,11 @@ function register_essb_matchup($post_types) {
 		)
 		, 'public' => true
 		, 'admin_body_class' => array(
-			'essb-matchup'
+			'essb-match'
 		)
 		, 'has_archive' => true
 		, 'rewrite' => array(
-			'slug' => 'matchup'
+			'slug' => 'match'
 		)
 		, 'capability_type' => 'post'
 		, 'edit_columns' => array(

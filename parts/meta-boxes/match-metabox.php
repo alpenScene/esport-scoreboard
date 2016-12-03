@@ -1,17 +1,17 @@
 <?php
 
 /*
-  Title: Matchup
-  Post Type: essb_matchup
+  Title: Match
+  Post Type: essb_match
  */
 
 piklist('field', array(
 	'type' => 'group'
-	, 'label' => __('Matchup Info', 'esport_scoreboard')
+	, 'label' => __('Match Info', 'esport_scoreboard')
 	, 'fields' => array(
 		array(
 			'type' => 'select'
-			, 'field' => 'matchup_team1'
+			, 'field' => 'match_team1'
 			, 'label' => __('Team 1', 'esport_scoreboard')
 			, 'columns' => 3
 			, 'choices' => array('' => 'Select a Team') + piklist(get_posts(array(
@@ -22,7 +22,7 @@ piklist('field', array(
 		)
 		, array(
 			'type' => 'number'
-			, 'field' => 'matchup_score1'
+			, 'field' => 'match_score1'
 			, 'label' => __('Score 1', 'esport_scoreboard')
 			, 'columns' => 1
 			, 'attributes' => array(
@@ -31,14 +31,14 @@ piklist('field', array(
 			)
 			, 'conditions' => array(
 				array(
-					'field' => 'matchup_status'
+					'field' => 'match_status'
 					, 'value' => 'closed'
 				)
 			)
 		)
 		, array(
 			'type' => 'number'
-			, 'field' => 'matchup_score2'
+			, 'field' => 'match_score2'
 			, 'label' => __('Score 2', 'esport_scoreboard')
 			, 'columns' => 1
 			, 'attributes' => array(
@@ -47,14 +47,14 @@ piklist('field', array(
 			)
 			, 'conditions' => array(
 				array(
-					'field' => 'matchup_status'
+					'field' => 'match_status'
 					, 'value' => 'closed'
 				)
 			)
 		)
 		, array(
 			'type' => 'select'
-			, 'field' => 'matchup_team2'
+			, 'field' => 'match_team2'
 			, 'label' => __('Team 2', 'esport_scoreboard')
 			, 'columns' => 3
 			, 'choices' => array('' => 'Select a Team') + piklist(get_posts(array(
@@ -69,7 +69,7 @@ piklist('field', array(
 
 piklist('field', array(
 	'type' => 'select'
-	, 'field' => 'matchup_status'
+	, 'field' => 'match_status'
 	, 'label' => __('Status', 'essb_scoreboard')
 	, 'description' => __('Is it upcoming or already over?', 'essb_scoreboard')
 	, 'choices' => array(
@@ -82,7 +82,7 @@ piklist('field', array(
 
 piklist('field', array(
 	'type' => 'text'
-	, 'field' => 'matchup_date'
+	, 'field' => 'match_date'
 	, 'label' => __('Date', 'essb_scoreboard')
 	, 'attributes' => array(
 		'class' => 'essb-datetime'
@@ -92,14 +92,29 @@ piklist('field', array(
 
 piklist('field', array(
 	'type' => 'text'
-	, 'field' => 'matchup_url'
-	, 'label' => __('Matchlink', 'essb_scoreboard')
+	, 'field' => 'match_stream'
+	, 'label' => __('Stream', 'essb_scoreboard')
 ));
+
 
 
 piklist('field', array(
-	'type' => 'text'
-	, 'field' => 'matchup_stream'
-	, 'label' => __('Streamurl', 'essb_scoreboard')
+	'type' => 'group'
+	, 'field' => 'match_links'
+	, 'label' => __('Related Links', 'esport_scoreboard')
+	, 'add_more' => true
+	, 'fields' => array(
+		array(
+			'type' => 'text'
+			, 'field' => 'match_link_url'
+			, 'label' => __('URL', 'esport_scoreboard')
+			, 'columns' => 5
+		)
+		, array(
+			'type' => 'text'
+			, 'field' => 'match_link_name'
+			, 'label' => __('Name', 'esport_scoreboard')
+			, 'columns' => 5
+		)
+	)
 ));
-
