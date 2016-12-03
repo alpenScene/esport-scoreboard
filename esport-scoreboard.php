@@ -50,7 +50,7 @@ class eSportScoreBoard {
 		curl_close($ch);
 		foreach ($countries as $country) {			
 			if ($country->region === 'Europe') {
-				$europe[$country->alpha2Code] = $country->name;
+				$europe[strtolower($country->alpha2Code)] = $country->name;
 			}
 		}
 		
