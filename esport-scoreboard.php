@@ -81,7 +81,7 @@ class eSportScoreBoard {
 						// get the current post ID number
 						$id = get_the_ID();
 						// add ID number with order strong
-						$title = $id . '-' . get_post(get_post_meta($id, 'match_team1', true))->team_tag . '-vs-' . get_post(get_post_meta($id, 'match_team1', true))->team_tag;
+						$title = $id . '-' . get_post(get_post_meta($id, 'match_team1', true))->team_tag . '-vs-' . get_post(get_post_meta($id, 'match_team2', true))->team_tag;
 					}
 				}
 				return $title;
