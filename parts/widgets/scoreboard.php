@@ -47,9 +47,9 @@ echo '<div id="scoreboard">';
 		?> 
 		<tr>
 			<td class="result-<?php echo $team1result ?>">
-				<a href="<?php echo $team1->team_url ?>" target="_blank">
+				<a href="<?php echo $team1->team_url ?>" target="_blank" title="<?php echo $team1->post_title ?>">
 					<img src="http://flagpedia.net/data/flags/mini/<?php echo strtolower($team1->team_country) ?>.png" style="width: 20px">
-					<?php echo $team1->post_title ?>
+					<?php echo $team1->team_tag ? $team1->team_tag : $team1->post_title ?>
 				</a>
 			</td>
 		<?php if ($matchClosed === true) : ?>
@@ -59,8 +59,8 @@ echo '<div id="scoreboard">';
 			<td colspan=2><?php echo $post->matchup_date ?></td>
 		<?php endif ?>
 			<td class="result-<?php echo $team2result ?>">
-				<a href="<?php echo $team2->team_url ?>" target="_blank">
-					<?php echo $team2->post_title ?>
+				<a href="<?php echo $team2->team_url ?>" target="_blank" title="<?php echo $team2->post_title ?>">
+					<?php echo $team2->team_tag ? $team2->team_tag : $team2->post_title ?>
 					<img src="http://flagpedia.net/data/flags/mini/<?php echo strtolower($team2->team_country) ?>.png" style="width: 20px">
 				</a>
 			</td>

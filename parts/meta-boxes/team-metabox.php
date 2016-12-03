@@ -10,33 +10,35 @@ piklist('field', array(
 	, 'label' => __('Team Info', 'esport_scoreboard')
 	, 'fields' => array(
 		array(
+			'type' => 'file'
+			, 'field' => 'team_logo'
+//			, 'scope' => 'post_meta'
+			, 'label' => __('Team Logo', 'esport_scoreboard')
+			, 'columns' => 3
+			, 'options' => array(
+				'modal_title' => __('Add File(s)', 'esport_scoreboard')
+				, 'button' => __('Add', 'esport_scoreboard')
+			)
+		)
+		, array(
+			'type' => 'text'
+			, 'field' => 'team_tag'
+			, 'label' => __('Clantag', 'esport_scoreboard')
+			, 'columns' => 3
+		)
+		, array(
 			'type' => 'select'
 			, 'field' => 'team_country'
 			, 'label' => __('Country', 'esport_scoreboard')
 			, 'columns' => 3
-			, 'value' => 'AT'
+			, 'value' => 'at'
 			, 'choices' => eSportScoreBoard::getCountries()
-//			array(
-//				'at' => __('Austria', 'esport_scoreboard')
-//				, 'ch' => __('Switzerland', 'esport_scoreboard')
-//				, 'de' => __('Germany', 'esport_scoreboard')
-//			)
 		)
 		, array(
 			'type' => 'text'
 			, 'field' => 'team_url'
 			, 'label' => __('Website', 'esport_scoreboard')
 			, 'columns' => 3
-		)
-		, array(
-			'type' => 'file'
-			, 'field' => 'upload_media'
-			, 'scope' => 'post_meta'
-			, 'label' => __('Team Logo', 'esport_scoreboard')
-			, 'options' => array(
-				'modal_title' => __('Add File(s)', 'esport_scoreboard')
-				, 'button' => __('Add', 'esport_scoreboard')
-			)
 		)
 	)
 ));
