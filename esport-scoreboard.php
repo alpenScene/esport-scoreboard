@@ -32,7 +32,13 @@ class eSportScoreBoard {
 	}
 	
 	
-	public static function getCountries() {
+	/**
+	 * Calls a rest-api for getting all countries for an area (continent)
+	 * @see https://restcountries.eu/
+	 * @param string $area Default 'Europe'
+	 * @return array $countriesByArea ['at' => 'Austria', 'de' => 'Germany']
+	 */	
+	public static function getCountries($area = 'Europe') {
 		
 		$countryurl = 'https://restcountries.eu/rest/v1/all';
 		// Initialize a single cURL handle for use of each online-check
@@ -51,25 +57,28 @@ class eSportScoreBoard {
 		// Close the curl request
 		curl_close($ch);
 		foreach ($countries as $country) {			
-			if ($country->region === 'Europe') {
-				$europe[strtolower($country->alpha2Code)] = $country->name;
+			if ($country->region === $area) {
+				$countriesByArea[strtolower($country->alpha2Code)] = $country->name;
 			}
 		}
 		
-		return $europe;
+		return $countriesByArea;
 			
 	}
 	
+	/**
+	 * Hooking into title_save_pre for our Match CPT so it get's a proper name automatically
+	 * @see https://www.iftekhar.net/auto-generate-post-title-for-posts-or-custom-post-type-in-wordpress/
+	 * @todo disable title input in dashboard
+	 */
 	function autofill_matchup_title() {
 		
-		// @see https://www.iftekhar.net/auto-generate-post-title-for-posts-or-custom-post-type-in-wordpress/
 		add_filter('title_save_pre', function($title) {
 				global $post;
 				if (isset($post->ID)) {
 					if (empty($_POST['post_title']) && get_post_type($post->ID) == 'essb_matchup') {
 						// get the current post ID number
 						$id = get_the_ID();
-//						die(var_dump(get_post_meta($id, 'matchup_team1', true)));
 						// add ID number with order strong
 						$title = $id . '-' . get_post(get_post_meta($id, 'matchup_team1', true))->team_tag . '-vs-' . get_post(get_post_meta($id, 'matchup_team1', true))->team_tag;
 					}
