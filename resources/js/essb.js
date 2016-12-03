@@ -2,7 +2,9 @@
 
 	var essb = {
 		init: function () {
-			$('.essb-datetime').datetimepicker({step:15});
+			if ($.fn.datetimepicker) {
+				$('.essb-datetime').datetimepicker({step:15});
+			}
 		}
 	};
 

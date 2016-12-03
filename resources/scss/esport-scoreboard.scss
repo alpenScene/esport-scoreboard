@@ -1,0 +1,74 @@
+#scoreboard {
+	
+	$color_win: #a2e0a2;
+	$color_lose: #f19393;
+	
+	font-size: 12px;
+	border: none;
+	
+	@mixin transition($speed: 0.4s) {
+		transition: all $speed;
+	}
+	
+	.essb-matchup {
+		
+		&:hover {
+			.essb-win {
+				@include transition;
+				background-color: $color_win;
+				color: white;
+			}
+			.essb-lose {
+				@include transition;
+				background-color: $color_lose;
+				color: white;
+			}
+		}
+	}
+	
+	.essb-data {
+		padding: 0 4px;
+		border: none;
+	}
+	
+	.essb-score1, .essb-team2 {
+		text-align: right;
+		img {
+			padding-right: 0;
+			padding-left: 2px;
+		}
+	}
+	
+	.essb-score1, .essb-score2 {
+		font-weight: bold;
+		padding: 0 8px;
+		&.essb-win {
+			color: darken($color_win, 30%);
+		}
+		&.essb-lose {
+			color: darken($color_lose, 30%);
+		}
+	}
+	
+	.essb-date {
+		text-align: center;
+		.essb-fulldate {
+			display: none;
+		}
+		&:hover {
+			.essb-fulldate {
+				display: block;
+			}
+			.essb-countdown {
+				display: none;
+			}
+		}
+	}
+	
+	img {
+		width: 16px;
+		padding-right: 2px;
+		vertical-align: -1px;
+	}
+	
+}

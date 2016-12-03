@@ -24,9 +24,11 @@ class eSportScoreBoard {
 			wp_enqueue_style( 'essb_datetime_css', plugins_url('/resources/lib/xdan-datetimepicker/jquery.datetimepicker.css', __FILE__),false,'0.2','all');
 			// datetimepicker.full.min is required to prevent i.dateformat error
 			wp_enqueue_script( 'essb_datetime_js', plugins_url('/resources/lib/xdan-datetimepicker/jquery.datetimepicker.full.min.js', __FILE__), array( 'jquery' ), '20161129', true);
-			wp_enqueue_script( 'essb_js', plugins_url('/resources/js/essb.js', __FILE__), array( 'jquery' ), '20161129', true);
 		} );
-		
+		add_action( 'wp_enqueue_scripts', function() {
+			wp_enqueue_style( 'essb_css', plugins_url('/resources/css/esport-scoreboard.css', __FILE__),false,'0.1','all');
+			wp_enqueue_script( 'essb_admin_js', plugins_url('/resources/js/essb.js', __FILE__), array( 'jquery' ), '20161129', true);
+		} );
 	}
 	
 	
@@ -61,17 +63,20 @@ class eSportScoreBoard {
 	function autofill_matchup_title() {
 		
 		// @see https://www.iftekhar.net/auto-generate-post-title-for-posts-or-custom-post-type-in-wordpress/
-		add_filter('title_save_pre',function($title) {
-			   global $post;
-			   if (isset($post->ID)) {
-				  if (empty($_POST['post_title']) && get_post_type($post->ID) == 'essb_matchup'){
-					 // get the current post ID number
-					 $id = get_the_ID();
-					 // add ID number with order strong
-					 $title = 'Matchup-'.$id;} }
-			   return $title; 
+		add_filter('title_save_pre', function($title) {
+				global $post;
+				if (isset($post->ID)) {
+					if (empty($_POST['post_title']) && get_post_type($post->ID) == 'essb_matchup') {
+						// get the current post ID number
+						$id = get_the_ID();
+//						die(var_dump(get_post_meta($id, 'matchup_team1', true)));
+						// add ID number with order strong
+						$title = $id . '-' . get_post(get_post_meta($id, 'matchup_team1', true))->team_tag . '-vs-' . get_post(get_post_meta($id, 'matchup_team1', true))->team_tag;
+					}
+				}
+				return $title;
 			});
-	}
+		}
 }
 	
 endif;
