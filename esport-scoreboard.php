@@ -79,16 +79,31 @@ class eSportScoreBoard {
 
 		add_filter('title_save_pre', function($title) {
 			global $post;
-			if (isset($post->ID)) {
-				if (get_post_type($post->ID) == 'essb_match') {
-					// get the current post ID number
-					$id = get_the_ID();
-					// add ID number with order strong
-					$title = $id . ' - ' . get_post(get_post_meta($id, 'match_team1', true))->team_tag . ' vs ' . get_post(get_post_meta($id, 'match_team2', true))->team_tag;
-				}
+			if (isset($post->ID) && get_post_type($post->ID) == 'essb_match') {
+				// get the current post ID number
+				$id = get_the_ID();
+				// add ID number with order strong
+				$title = $id . ' - ' . get_post(get_post_meta($id, 'match_team1', true))->team_tag . ' vs ' . get_post(get_post_meta($id, 'match_team2', true))->team_tag;
 			}
 			return $title;
 		});
+		
+		// @see http://stackoverflow.com/a/10017619
+		add_action('admin_head', 'modify_admin_css');
+		function modify_admin_css() {
+			
+			global $post;
+			if (isset($post->ID) && get_post_type($post->ID) == 'essb_match') {
+				?>
+				<style>
+					div#titlediv {
+						display: none;
+					}
+				</style>
+				<?php
+			}
+		}
+		
 	}
 	
 	// http://wordpress.stackexchange.com/a/105936
