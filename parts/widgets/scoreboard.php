@@ -75,8 +75,8 @@ echo $after_title;
 				<?php if (strlen($team1->team_url) > 0) : ?>
 					<a href="<?php echo $team1->team_url ?>" target="_blank" title="<?php echo $team1->post_title ?>">
 				<?php endif ?>
-						<img src="http://flagpedia.net/data/flags/mini/<?php echo strtolower($team1->team_country) ?>.png">
-						<?php echo $team1name ?>
+					<img src="http://flagpedia.net/data/flags/mini/<?php echo strtolower($team1->team_country) ?>.png">
+					<span title="<?php echo $team1->post_title ?>"><?php echo $team1name ?></span>
 				<?php if (strlen($team1->team_url) > 0) : ?>
 					</a>
 				<?php endif ?>
@@ -98,14 +98,14 @@ echo $after_title;
 			
 			<!-- Team 2 -->
 			<td class="essb-data essb-team2 essb-<?php echo $team2result ?>">
-			<?php if (strlen($team1->team_url) > 0) : ?>
-				<a href="<?php echo $team2->team_url ?>" target="_blank" title="<?php echo $team2->post_title ?>">
-			<?php endif ?>
-				<?php echo $team2name ?>
-				<img src="http://flagpedia.net/data/flags/mini/<?php echo strtolower($team2->team_country) ?>.png">
-			<?php if (strlen($team1->team_url) > 0) : ?>
-				</a>
-			<?php endif ?>
+				<?php if (strlen($team2->team_url) > 0) : ?>
+					<a href="<?php echo $team2->team_url ?>" target="_blank">
+				<?php endif ?>
+					<span title="<?php echo $team2->post_title ?>"><?php echo $team2name ?></span>
+					<img src="http://flagpedia.net/data/flags/mini/<?php echo strtolower($team2->team_country) ?>.png">
+				<?php if (strlen($team2->team_url) > 0) : ?>
+					</a>
+				<?php endif ?>
 			</td>
 			
 		</tr>
