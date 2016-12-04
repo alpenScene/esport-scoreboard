@@ -20,7 +20,6 @@ class eSportScoreBoard {
 		essb_post_types();
 		
 		$this->autofill_match_title();
-		$this->autofill_match_permalink();
 		add_action( 'save_post', array(__CLASS__, 'autofill_match_permalink'));
 		
 		add_action( 'admin_enqueue_scripts', function() {
@@ -30,9 +29,24 @@ class eSportScoreBoard {
 			wp_enqueue_script( 'essb_admin_js', plugins_url('/resources/js/essb.js', __FILE__), array( 'jquery' ), '20161129', true);
 		} );
 		add_action( 'wp_enqueue_scripts', function() {
-			wp_enqueue_style( 'essb_css', plugins_url('/resources/css/esport-scoreboard.css', __FILE__),false,'0.1','all');
+			wp_enqueue_style( 'essb_css', plugins_url('/resources/css/esport-scoreboard.css', __FILE__),false,'0.3','all');
 			wp_enqueue_script( 'essb_admin_js', plugins_url('/resources/js/essb.js', __FILE__), array( 'jquery' ), '20161129', true);
 		} );
+		
+		/**
+		 * Set the Archive title
+		 */
+		add_filter( 'get_the_archive_title', function ( $title ) {
+
+			if(is_post_type_archive('essb_match') ) {
+				
+				$title = __('All Matches', 'esport_scoreboard');
+
+			}
+
+			return $title;
+
+		});
 	}
 	
 	
@@ -103,6 +117,7 @@ class eSportScoreBoard {
 				<?php
 			}
 		}
+		
 		
 	}
 	

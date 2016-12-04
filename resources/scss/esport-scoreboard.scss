@@ -11,17 +11,26 @@
 	}
 	
 	.essb-match {
-		
+		border-spacing: 0;
+		border-collapse: collapse;
 		&:hover {
 			.essb-win {
 				@include transition;
 				background-color: $color_win;
-				color: white;
 			}
 			.essb-lose {
 				@include transition;
 				background-color: $color_lose;
+			}
+			.essb-score1, .essb-score2 {
 				color: white;
+			}
+			
+			.essb-fulldate {
+				display: block;
+			}
+			.essb-countdown {
+				display: none;
 			}
 		}
 	}
@@ -55,20 +64,22 @@
 		.essb-fulldate {
 			display: none;
 		}
-		&:hover {
-			.essb-fulldate {
-				display: block;
-			}
-			.essb-countdown {
-				display: none;
-			}
-		}
 	}
-	
+	.essb-matchlink {
+		border: none;
+		padding: 0;
+		font-size: 20px;
+		line-height: 1;
+		text-align: right;
+	}
 	img {
 		width: 16px;
 		padding-right: 2px;
 		vertical-align: -1px;
+	}
+	.essb-more {
+		border: none;
+		padding: 0;
 	}
 	
 }

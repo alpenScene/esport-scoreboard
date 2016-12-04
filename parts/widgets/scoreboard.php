@@ -16,19 +16,29 @@ echo $settings['essb_widget_title'];
 echo $after_title;
 
 	$matches = get_posts(array(
-				'numberposts' => -1
+				'numberposts' => $settings['essb_widget_limit']
 				, 'post_type' => 'essb_match'
 					));
+	$matchcount = 0; ?>
 
-	echo '<table id="scoreboard">';
-	// The Loop
-	foreach ($matches as $post) {
+	<table id="scoreboard">
+	
+	<?php // The Loop
+	foreach ($matches as $post) :
 		
 		$team1 = get_post(get_post_meta($post->ID, 'match_team1', true));
 		$team2 = get_post(get_post_meta($post->ID, 'match_team2', true));
 		$team1name = $team1->team_tag ? $team1->team_tag : $team1->post_title;
 		$team2name = $team2->team_tag ? $team2->team_tag : $team2->post_title;
 		$matchDefwin = get_post_meta($post->ID, 'match_status', true) === 'defwin';
+		$matchLinks = get_post_meta($post->ID, 'match_links', true);
+		foreach ($matchLinks as $matchLink) {
+			if ($matchLink['match_link_name'] === 'Matchlink') {
+				$match_link = $matchLink['match_link_url'];
+			} else {
+				$match_link = false;
+			}
+		}
 		
 		if ($matchDefwin === false) {
 			
@@ -67,7 +77,7 @@ echo $after_title;
 		}
 		
 		?> 
-		<tr class="essb-match"<?php echo $matchClosed || $matchDefwin ? ' title="' . $date . '"' : ''?>>
+		<tr class="essb-match" <?php echo $matchClosed || $matchDefwin ? ' title="' . $date . '"' : ''?>>
 			
 			<!-- Team 1 -->
 			<td class="essb-data essb-team1 essb-<?php echo $team1result ?>">
@@ -107,11 +117,20 @@ echo $after_title;
 					</a>
 				<?php endif ?>
 			</td>
+			<td class="essb-matchlink">
+				<?php if ($match_link) :?>
+					<a href="<?php echo $match_link ?>" target="_blank" title="Matchlink">&raquo;</a>
+				<?php endif ?>
+			</td>
 			
 		</tr>
+			
 		<?php 
-	}
+	endforeach; // matches ?>
+		<tr>
+			<td colspan="5" class="essb-more"><a href="/match">&raquo; All matches</a></td>
+		</tr>
+	</table>
 
-echo '</table>';
-
+<?php 
 echo $after_widget;

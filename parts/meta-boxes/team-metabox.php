@@ -39,6 +39,9 @@ piklist('field', array(
 			, 'field' => 'team_url'
 			, 'label' => __('Website', 'esport_scoreboard')
 			, 'columns' => 3
+			, 'validate' => array(
+				array('type' => 'url')
+			)
 		)
 	)
 ));
