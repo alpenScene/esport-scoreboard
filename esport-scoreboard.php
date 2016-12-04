@@ -18,7 +18,10 @@ class eSportScoreBoard {
 	function __construct() {
 		
 		essb_post_types();
+		
 		$this->autofill_match_title();
+		$this->autofill_match_permalink();
+		add_action( 'save_post', array(__CLASS__, 'autofill_match_permalink'));
 		
 		add_action( 'admin_enqueue_scripts', function() {
 			wp_enqueue_style( 'essb_datetimepicker_css', plugins_url('/resources/lib/xdan-datetimepicker/jquery.datetimepicker.css', __FILE__),false,'0.2','all');
@@ -73,20 +76,43 @@ class eSportScoreBoard {
 	 * @todo disable title input in dashboard
 	 */
 	function autofill_match_title() {
-		
+
 		add_filter('title_save_pre', function($title) {
-				global $post;
-				if (isset($post->ID)) {
-					if (empty($_POST['post_title']) && get_post_type($post->ID) == 'essb_match') {
-						// get the current post ID number
-						$id = get_the_ID();
-						// add ID number with order strong
-						$title = $id . '-' . get_post(get_post_meta($id, 'match_team1', true))->team_tag . '-vs-' . get_post(get_post_meta($id, 'match_team2', true))->team_tag;
-					}
+			global $post;
+			if (isset($post->ID)) {
+				if (get_post_type($post->ID) == 'essb_match') {
+					// get the current post ID number
+					$id = get_the_ID();
+					// add ID number with order strong
+					$title = $id . ' - ' . get_post(get_post_meta($id, 'match_team1', true))->team_tag . ' vs ' . get_post(get_post_meta($id, 'match_team2', true))->team_tag;
 				}
-				return $title;
-			});
+			}
+			return $title;
+		});
+	}
+	
+	// http://wordpress.stackexchange.com/a/105936
+	function autofill_match_permalink($post_id) {
+			
+		// verify post is match and not a revision
+		if ( get_post_type($post_id) == 'essb_match' && ! wp_is_post_revision( $post_id ) ) {
+
+			// unhook this function to prevent infinite looping
+			remove_action( 'save_post', array(__CLASS__, 'autofill_match_permalink') );
+
+			// update the post slug
+			wp_update_post( array(
+				'ID' => $post_id,
+				'post_name' => sanitize_title(get_the_title($post_id))
+			));
+
+			// re-hook this function
+			add_action( 'save_post', array(__CLASS__, 'autofill_match_permalink') );
+
 		}
+	
+	}
+
 }
 	
 endif;
