@@ -47,7 +47,20 @@ class eSportScoreBoard {
 			return $title;
 
 		});
-	}
+		
+		/**
+		 * View all matches on the archive page
+		 */
+		add_action('pre_get_posts', function($query) {
+
+			if ($query->is_archive() && is_post_type_archive('essb_match')) {
+
+				$query->set('posts_per_page', -1);
+
+				return $query;
+			}
+			});
+		}
 	
 	
 	/**
