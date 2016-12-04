@@ -68,29 +68,46 @@ echo $after_title;
 		
 		?> 
 		<tr class="essb-match"<?php echo $matchClosed || $matchDefwin ? ' title="' . $date . '"' : ''?>>
+			
+			<!-- Team 1 -->
 			<td class="essb-data essb-team1 essb-<?php echo $team1result ?>">
-				<a href="<?php echo $team1->team_url ?>" target="_blank" title="<?php echo $team1->post_title ?>">
-					<img src="http://flagpedia.net/data/flags/mini/<?php echo strtolower($team1->team_country) ?>.png">
-					<?php echo $team1name ?>
-				</a>
+				
+				<?php if (strlen($team1->team_url) > 0) : ?>
+					<a href="<?php echo $team1->team_url ?>" target="_blank" title="<?php echo $team1->post_title ?>">
+				<?php endif ?>
+						<img src="http://flagpedia.net/data/flags/mini/<?php echo strtolower($team1->team_country) ?>.png">
+						<?php echo $team1name ?>
+				<?php if (strlen($team1->team_url) > 0) : ?>
+					</a>
+				<?php endif ?>
+				
 			</td>
-		<?php if ($matchClosed === true) : ?>
-			<td class="essb-data essb-score1 essb-<?php echo $team1result ?>"><?php echo $score1 ?></td>
-			<td class="essb-data essb-score2 essb-<?php echo $team2result ?>"><?php echo $score2 ?></td>
-		<?php elseif ($matchClosed === false && $matchDefwin === false) : ?>
-			<?php /* <td colspan=2 class="essb-data essb-date"><?php echo date('D, d.m.', strtotime($post->match_date)) ?></td> */ ?>
-			<td colspan=2 class="essb-data essb-date"><span class="essb-fulldate"><?php echo $date ?></span><span class="essb-countdown"><?php echo $countdown ?></span></td>
-		<?php elseif ($matchDefwin === true) : ?>
-			<td colspan=2 class="essb-data essb-defwin">
-				<?php echo $team1result === 'win' ? '&laquo; defwin' : 'defwin &raquo;' ?>
-			</td>
-		<?php endif ?>
+			
+			<!-- Ergebnis / Datum -->
+			<?php if ($matchClosed === true) : ?>
+				<td class="essb-data essb-score1 essb-<?php echo $team1result ?>"><?php echo $score1 ?></td>
+				<td class="essb-data essb-score2 essb-<?php echo $team2result ?>"><?php echo $score2 ?></td>
+			<?php elseif ($matchClosed === false && $matchDefwin === false) : ?>
+				<?php /* <td colspan=2 class="essb-data essb-date"><?php echo date('D, d.m.', strtotime($post->match_date)) ?></td> */ ?>
+				<td colspan=2 class="essb-data essb-date"><span class="essb-fulldate"><?php echo $date ?></span><span class="essb-countdown"><?php echo $countdown ?></span></td>
+			<?php elseif ($matchDefwin === true) : ?>
+				<td colspan=2 class="essb-data essb-defwin">
+					<?php echo $team1result === 'win' ? '&laquo; defwin' : 'defwin &raquo;' ?>
+				</td>
+			<?php endif ?>
+			
+			<!-- Team 2 -->
 			<td class="essb-data essb-team2 essb-<?php echo $team2result ?>">
+			<?php if (strlen($team1->team_url) > 0) : ?>
 				<a href="<?php echo $team2->team_url ?>" target="_blank" title="<?php echo $team2->post_title ?>">
-					<?php echo $team2name ?>
-					<img src="http://flagpedia.net/data/flags/mini/<?php echo strtolower($team2->team_country) ?>.png">
+			<?php endif ?>
+				<?php echo $team2name ?>
+				<img src="http://flagpedia.net/data/flags/mini/<?php echo strtolower($team2->team_country) ?>.png">
+			<?php if (strlen($team1->team_url) > 0) : ?>
 				</a>
+			<?php endif ?>
 			</td>
+			
 		</tr>
 		<?php 
 	}
