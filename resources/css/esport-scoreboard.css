@@ -24,13 +24,13 @@
       color: #3aaf3a; }
     #scoreboard .essb-score1.essb-lose, #scoreboard .essb-score2.essb-lose {
       color: #d01b1b; }
-  #scoreboard .essb-date {
+  #scoreboard .essb-date, #scoreboard .essb-defwin {
     text-align: center; }
-    #scoreboard .essb-date .essb-fulldate {
+    #scoreboard .essb-date .essb-fulldate, #scoreboard .essb-defwin .essb-fulldate {
       display: none; }
-    #scoreboard .essb-date:hover .essb-fulldate {
+    #scoreboard .essb-date:hover .essb-fulldate, #scoreboard .essb-defwin:hover .essb-fulldate {
       display: block; }
-    #scoreboard .essb-date:hover .essb-countdown {
+    #scoreboard .essb-date:hover .essb-countdown, #scoreboard .essb-defwin:hover .essb-countdown {
       display: none; }
   #scoreboard img {
     width: 16px;

@@ -5,7 +5,7 @@
   Standalone: true
   Description: List your most recent matches
  */
-setlocale(LC_ALL, "de");
+setlocale(LC_ALL, "de_DE");
 
 echo $before_widget;
 
@@ -28,31 +28,46 @@ echo $after_title;
 		$team2 = get_post(get_post_meta($post->ID, 'match_team2', true));
 		$team1name = $team1->team_tag ? $team1->team_tag : $team1->post_title;
 		$team2name = $team2->team_tag ? $team2->team_tag : $team2->post_title;
-		$matchClosed = get_post_meta($post->ID, 'match_status', true) === 'closed';
-		$score1 = get_post_meta($post->ID, 'match_score1', true);
-		$score2 = get_post_meta($post->ID, 'match_score2', true);
+		$matchDefwin = get_post_meta($post->ID, 'match_status', true) === 'defwin';
 		
-		$date = strftime('%a, %d.%m. %H:%M', strtotime($post->match_date));
-		$remaining = strtotime($post->match_date) - time();
-		$days_remaining = floor($remaining / 86400);
-		$hours_remaining = floor(($remaining % 86400) / 3600);
-		$minutes_remaining = floor(($remaining % 3600) / 60);
-		$countdown = $days_remaining . 'd' . $hours_remaining . 'h' . $minutes_remaining . 'm';
-		
-		if ($matchClosed && $score1 === $score2) {
-			$team1result = 'draw';
-			$team2result = 'draw';
-		} elseif ($matchClosed && $score1 > $score2) {
-			$team1result = 'win';
-			$team2result = 'lose';
-		} elseif ($matchClosed && $score1 < $score2) {
-			$team1result = 'lose';
-			$team2result = 'win';
-		} else {
-			$team1result = $team2result = 'open';
+		if ($matchDefwin === false) {
+			
+			// if it's not a Defwin, get status, results and date and calculate countdown
+			$matchClosed = get_post_meta($post->ID, 'match_status', true) === 'closed';
+			$score1 = get_post_meta($post->ID, 'match_score1', true);
+			$score2 = get_post_meta($post->ID, 'match_score2', true);		
+
+			$date = strftime('%a, %d.%m. %H:%M', strtotime($post->match_date));
+			$remaining = strtotime($post->match_date) - time();
+			$days_remaining = floor($remaining / 86400);
+			$hours_remaining = floor(($remaining % 86400) / 3600);
+			$minutes_remaining = floor(($remaining % 3600) / 60);
+			$countdown = $days_remaining . 'd' . $hours_remaining . 'h' . $minutes_remaining . 'm';
+
+			if ($matchClosed && $score1 === $score2) {
+				$team1result = 'draw';
+				$team2result = 'draw';
+			} elseif ($matchClosed && $score1 > $score2) {
+				$team1result = 'win';
+				$team2result = 'lose';
+			} elseif ($matchClosed && $score1 < $score2) {
+				$team1result = 'lose';
+				$team2result = 'win';
+			} else {
+				$team1result = $team2result = 'open';
+			}
+			
+		} elseif ($matchDefwin === true) {
+			
+			// if it's a Defwin get the defwin winner team meta
+			$winner = get_post_meta($post->ID, 'match_defwin_winner', true);
+			$team1result = $winner === 'team1' ? 'win' : 'lose';
+			$team2result = $winner === 'team2' ? 'win' : 'lose';
+			
 		}
+		
 		?> 
-		<tr class="essb-match" <?php echo $matchClosed === true ? 'title="' . $date . '"' : ''?>>
+		<tr class="essb-match"<?php echo $matchClosed || $matchDefwin ? ' title="' . $date . '"' : ''?>>
 			<td class="essb-data essb-team1 essb-<?php echo $team1result ?>">
 				<a href="<?php echo $team1->team_url ?>" target="_blank" title="<?php echo $team1->post_title ?>">
 					<img src="http://flagpedia.net/data/flags/mini/<?php echo strtolower($team1->team_country) ?>.png">
@@ -62,9 +77,13 @@ echo $after_title;
 		<?php if ($matchClosed === true) : ?>
 			<td class="essb-data essb-score1 essb-<?php echo $team1result ?>"><?php echo $score1 ?></td>
 			<td class="essb-data essb-score2 essb-<?php echo $team2result ?>"><?php echo $score2 ?></td>
-		<?php else : ?>
+		<?php elseif ($matchClosed === false && $matchDefwin === false) : ?>
 			<?php /* <td colspan=2 class="essb-data essb-date"><?php echo date('D, d.m.', strtotime($post->match_date)) ?></td> */ ?>
 			<td colspan=2 class="essb-data essb-date"><span class="essb-fulldate"><?php echo $date ?></span><span class="essb-countdown"><?php echo $countdown ?></span></td>
+		<?php elseif ($matchDefwin === true) : ?>
+			<td colspan=2 class="essb-data essb-defwin">
+				<?php echo $team1result === 'win' ? '&laquo; defwin' : 'defwin &raquo;' ?>
+			</td>
 		<?php endif ?>
 			<td class="essb-data essb-team2 essb-<?php echo $team2result ?>">
 				<a href="<?php echo $team2->team_url ?>" target="_blank" title="<?php echo $team2->post_title ?>">
