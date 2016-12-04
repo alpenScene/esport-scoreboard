@@ -1,8 +1,14 @@
+/**
+ * General Scoreboard styles
+ */
 #scoreboard {
   font-size: 12px;
   border: none;
   /**
    * Widget specific styles
+   */
+  /**
+   * Archive page specific styles
    */ }
   #scoreboard .essb-match {
     border-spacing: 0;
@@ -41,18 +47,20 @@
   #scoreboard .essb-more {
     border: none;
     padding: 0; }
+  #scoreboard .essb-score1, #scoreboard .essb-team2 {
+    text-align: right; }
+    #scoreboard .essb-score1 img, #scoreboard .essb-team2 img {
+      padding-right: 0;
+      padding-left: 2px; }
   .esport-scoreboard-scoreboard #scoreboard .essb-match:hover .essb-fulldate {
     display: block; }
   .esport-scoreboard-scoreboard #scoreboard .essb-match:hover .essb-countdown {
     display: none; }
   .esport-scoreboard-scoreboard #scoreboard .essb-data {
     padding: 0 4px; }
-  .esport-scoreboard-scoreboard #scoreboard .essb-score1, .esport-scoreboard-scoreboard #scoreboard .essb-team2 {
-    text-align: right; }
-    .esport-scoreboard-scoreboard #scoreboard .essb-score1 img, .esport-scoreboard-scoreboard #scoreboard .essb-team2 img {
-      padding-right: 0;
-      padding-left: 2px; }
   .esport-scoreboard-scoreboard #scoreboard .essb-fulldate {
     display: none; }
+  .archive #scoreboard .essb-team1, .archive #scoreboard .essb-team2 {
+    width: 33%; }
 
 /*# sourceMappingURL=esport-scoreboard.css.map */

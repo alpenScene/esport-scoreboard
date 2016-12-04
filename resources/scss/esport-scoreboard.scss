@@ -1,3 +1,7 @@
+/**
+ * General Scoreboard styles
+ */
+
 #scoreboard {
 	
 	$color_win: #a2e0a2;
@@ -68,10 +72,19 @@
 		padding: 0;
 	}
 	
+
+	.essb-score1, .essb-team2 {
+		text-align: right;
+		img {
+			padding-right: 0;
+			padding-left: 2px;
+		}
+	}
 	
 	/**
 	 * Widget specific styles
 	 */
+	
 	.esport-scoreboard-scoreboard & {
 		
 		.essb-match {
@@ -90,20 +103,22 @@
 		.essb-data {
 			padding: 0 4px;
 		}
-
-		.essb-score1, .essb-team2 {
-			text-align: right;
-			img {
-				padding-right: 0;
-				padding-left: 2px;
-			}
-		}
 	
 		.essb-fulldate {
 			display: none;
 		}
 		
 		
+	}
+	
+	/**
+	 * Archive page specific styles
+	 */
+
+	.archive & {
+		.essb-team1, .essb-team2 {
+			width: 33%;
+		}
 	}
 	
 	
