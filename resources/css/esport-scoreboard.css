@@ -1,6 +1,9 @@
 #scoreboard {
   font-size: 12px;
-  border: none; }
+  border: none;
+  /**
+   * Widget specific styles
+   */ }
   #scoreboard .essb-match {
     border-spacing: 0;
     border-collapse: collapse; }
@@ -12,18 +15,8 @@
       background-color: #f19393; }
     #scoreboard .essb-match:hover .essb-score1, #scoreboard .essb-match:hover .essb-score2 {
       color: white; }
-    #scoreboard .essb-match:hover .essb-fulldate {
-      display: block; }
-    #scoreboard .essb-match:hover .essb-countdown {
-      display: none; }
   #scoreboard .essb-data {
-    padding: 0 4px;
     border: none; }
-  #scoreboard .essb-score1, #scoreboard .essb-team2 {
-    text-align: right; }
-    #scoreboard .essb-score1 img, #scoreboard .essb-team2 img {
-      padding-right: 0;
-      padding-left: 2px; }
   #scoreboard .essb-score1, #scoreboard .essb-score2 {
     font-weight: bold;
     padding: 0 8px; }
@@ -33,8 +26,8 @@
       color: #d01b1b; }
   #scoreboard .essb-date, #scoreboard .essb-defwin {
     text-align: center; }
-    #scoreboard .essb-date .essb-fulldate, #scoreboard .essb-defwin .essb-fulldate {
-      display: none; }
+  #scoreboard .essb-fulldate {
+    display: block; }
   #scoreboard .essb-matchlink {
     border: none;
     padding: 0;
@@ -48,5 +41,18 @@
   #scoreboard .essb-more {
     border: none;
     padding: 0; }
+  .esport-scoreboard-scoreboard #scoreboard .essb-match:hover .essb-fulldate {
+    display: block; }
+  .esport-scoreboard-scoreboard #scoreboard .essb-match:hover .essb-countdown {
+    display: none; }
+  .esport-scoreboard-scoreboard #scoreboard .essb-data {
+    padding: 0 4px; }
+  .esport-scoreboard-scoreboard #scoreboard .essb-score1, .esport-scoreboard-scoreboard #scoreboard .essb-team2 {
+    text-align: right; }
+    .esport-scoreboard-scoreboard #scoreboard .essb-score1 img, .esport-scoreboard-scoreboard #scoreboard .essb-team2 img {
+      padding-right: 0;
+      padding-left: 2px; }
+  .esport-scoreboard-scoreboard #scoreboard .essb-fulldate {
+    display: none; }
 
 /*# sourceMappingURL=esport-scoreboard.css.map */

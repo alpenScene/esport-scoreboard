@@ -25,29 +25,13 @@
 			.essb-score1, .essb-score2 {
 				color: white;
 			}
-			
-			.essb-fulldate {
-				display: block;
-			}
-			.essb-countdown {
-				display: none;
-			}
 		}
 	}
-	
+
 	.essb-data {
-		padding: 0 4px;
 		border: none;
 	}
-	
-	.essb-score1, .essb-team2 {
-		text-align: right;
-		img {
-			padding-right: 0;
-			padding-left: 2px;
-		}
-	}
-	
+
 	.essb-score1, .essb-score2 {
 		font-weight: bold;
 		padding: 0 8px;
@@ -61,10 +45,12 @@
 	
 	.essb-date, .essb-defwin {
 		text-align: center;
-		.essb-fulldate {
-			display: none;
-		}
 	}
+	
+	.essb-fulldate {
+		display: block;
+	}
+	
 	.essb-matchlink {
 		border: none;
 		padding: 0;
@@ -81,5 +67,44 @@
 		border: none;
 		padding: 0;
 	}
+	
+	
+	/**
+	 * Widget specific styles
+	 */
+	.esport-scoreboard-scoreboard & {
+		
+		.essb-match {
+			
+			&:hover {
+				.essb-fulldate {
+					display: block;
+				}
+				.essb-countdown {
+					display: none;
+				}
+			}
+		}
+		
+
+		.essb-data {
+			padding: 0 4px;
+		}
+
+		.essb-score1, .essb-team2 {
+			text-align: right;
+			img {
+				padding-right: 0;
+				padding-left: 2px;
+			}
+		}
+	
+		.essb-fulldate {
+			display: none;
+		}
+		
+		
+	}
+	
 	
 }
