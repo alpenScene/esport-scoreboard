@@ -102,7 +102,10 @@ if(!is_post_type_archive('essb_match') ) {
 					<td class="essb-data essb-score2 essb-<?php echo $team2result ?>"><?php echo $score2 ?></td>
 				<?php elseif ($matchClosed === false && $matchDefwin === false) : ?>
 					<?php /* <td colspan=2 class="essb-data essb-date"><?php echo date('D, d.m.', strtotime($post->match_date)) ?></td> */ ?>
-					<td colspan=2 class="essb-data essb-date"><span class="essb-fulldate"><?php echo $date ?></span><span class="essb-countdown"><?php echo $countdown ?></span></td>
+					<td colspan=2 class="essb-data essb-date">
+						<span class="essb-fulldate"><?php echo $date ?></span>
+						<span class="essb-countdown"><?php echo $remaining >= 0 ? $countdown : 'live' ?></span>
+					</td>
 				<?php elseif ($matchDefwin === true) : ?>
 					<td colspan=2 class="essb-data essb-defwin">
 						<?php echo $team1result === 'win' ? '&laquo; defwin' : 'defwin &raquo;' ?>
