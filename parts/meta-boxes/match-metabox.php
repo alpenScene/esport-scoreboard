@@ -28,7 +28,7 @@ piklist('field', array(
 			, 'columns' => 1
 			, 'attributes' => array(
 				'min' => 0,
-				'max' => 16
+				'max' => 32
 			)
 			, 'conditions' => array(
 				array(
@@ -44,7 +44,7 @@ piklist('field', array(
 			, 'columns' => 1
 			, 'attributes' => array(
 				'min' => 0,
-				'max' => 16
+				'max' => 32
 			)
 			, 'conditions' => array(
 				array(
