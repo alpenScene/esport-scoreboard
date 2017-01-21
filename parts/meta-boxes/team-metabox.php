@@ -32,7 +32,7 @@ piklist('field', array(
 			, 'label' => __('Country', 'esport_scoreboard')
 			, 'columns' => 3
 			, 'value' => 'at'
-			, 'choices' => eSportScoreBoard::getCountries()
+			, 'choices' => eSportScoreBoard::getCountries('all')
 		)
 		, array(
 			'type' => 'text'
