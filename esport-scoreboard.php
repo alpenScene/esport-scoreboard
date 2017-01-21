@@ -88,7 +88,9 @@ class eSportScoreBoard {
 		// Close the curl request
 		curl_close($ch);
 		foreach ($countries as $country) {			
-			if ($country->region === $area) {
+			if ($area !== 'all' && $country->region === $area) {
+				$countriesByArea[strtolower($country->alpha2Code)] = $country->name;
+			} elseif ($area === 'all') {
 				$countriesByArea[strtolower($country->alpha2Code)] = $country->name;
 			}
 		}
@@ -102,7 +104,7 @@ class eSportScoreBoard {
 	 * @see https://www.iftekhar.net/auto-generate-post-title-for-posts-or-custom-post-type-in-wordpress/
 	 * @todo disable title input in dashboard
 	 */
-	function autofill_match_title() {
+	public static function autofill_match_title() {
 
 		add_filter('title_save_pre', function($title) {
 			global $post;
@@ -135,7 +137,7 @@ class eSportScoreBoard {
 	}
 	
 	// http://wordpress.stackexchange.com/a/105936
-	function autofill_match_permalink($post_id) {
+	public static function autofill_match_permalink($post_id) {
 			
 		// verify post is match and not a revision
 		if ( get_post_type($post_id) == 'essb_match' && ! wp_is_post_revision( $post_id ) ) {
