@@ -19,8 +19,11 @@ if(!is_post_type_archive('essb_match') ) {
 	echo $after_title;
 
 		$matches = get_posts(array(
-					'numberposts' => $settings['essb_widget_limit']
-					, 'post_type' => 'essb_match'
+					'numberposts'	=> $settings['essb_widget_limit']
+					, 'post_type'	=> 'essb_match'
+					, 'orderby'		=> 'meta_value'
+					, 'order'		=> 'DESC'
+					, 'meta_key'	=> 'match_date'
 						));
 		$matchcount = 0; ?>
 
@@ -132,7 +135,9 @@ if(!is_post_type_archive('essb_match') ) {
 			</tr>
 
 			<?php 
-		endforeach; // matches ?>
+		endforeach; // matches 
+		wp_reset_postdata(); ?>
+			
 			<tr>
 				<td colspan="5" class="essb-more"><a href="<?php echo get_bloginfo('url') ?>/match">&raquo; All matches</a></td>
 			</tr>
