@@ -18,6 +18,8 @@ piklist('field', array(
 			, 'choices' => array('' => 'Select a Team') + piklist(get_posts(array(
 				'numberposts' => -1
 				, 'post_type' => 'essb_team'
+				, 'orderby' => 'post_title'
+				, 'order' => 'ASC'
 					)), array('ID', 'post_title'))
 			, 'relate' => array('scope' => 'post')
 		)
@@ -61,6 +63,8 @@ piklist('field', array(
 			, 'choices' => array('' => 'Select a Team') + piklist(get_posts(array(
 				'numberposts' => -1
 				, 'post_type' => 'essb_team'
+				, 'orderby' => 'post_title'
+				, 'order' => 'ASC'
 					)), array('ID', 'post_title'))
 			, 'relate' => array('scope' => 'post')
 		))
